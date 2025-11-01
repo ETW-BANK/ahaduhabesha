@@ -40,6 +40,7 @@
         .form-control:focus {
             border-color: #ff919d;
             box-shadow: 0 0 0 0.2rem rgba(255, 145, 157, 0.25);
+            outline: none;
         }
         .btn-order {
             background: linear-gradient(105deg, #6394ff 0%, #ff919d 100%);
@@ -55,6 +56,10 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             color: white;
+        }
+        .btn-order:disabled {
+            opacity: 0.6;
+            transform: none;
         }
         .product-info {
             background: #f8f9fa;
@@ -84,24 +89,23 @@
             color: #ff919d;
             text-decoration: none;
         }
-        .contact-info {
-            background: #f0f8ff;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 30px;
-            text-align: center;
+        .success-message {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
         }
-        .contact-info h5 {
-            color: #333;
-            margin-bottom: 15px;
-        }
-        .contact-info p {
-            margin: 5px 0;
-            color: #666;
-        }
-        .contact-info .email {
-            color: #ff919d;
-            font-weight: 600;
+        .error-message {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
         }
     </style>
 </head>
@@ -168,55 +172,64 @@
                     <div class="order-form">
                         <h2 class="text-center mb-4">Order Form</h2>
                         
+                        <!-- Success Message -->
+                        <div id="successMessage" class="success-message">
+                            <strong>Order sent successfully!</strong> We will contact you soon.
+                        </div>
+                        
+                        <!-- Error Message -->
+                        <div id="errorMessage" class="error-message">
+                            <strong>Error:</strong> <span id="errorText">Failed to send order. Please try again.</span>
+                        </div>
+                        
                         <!-- Product Information -->
                         <div class="product-info">
                             <div class="product-name" id="productName">Product Name</div>
                             <div class="product-price" id="productPrice">$0.00</div>
                         </div>
 
-                        <!-- Order Form - Using mailto for email sending -->
-                        <form id="orderForm" action="#" method="POST">
-                            <input type="hidden" id="hiddenProductName" name="productName">
-                            <input type="hidden" id="hiddenProductPrice" name="productPrice">
+                        <!-- Order Form using Web3Forms (Free Email Service) -->
+                        <form id="orderForm" action="https://api.web3forms.com/submit" method="POST">
+                            <!-- Hidden fields for Web3Forms -->
+                            <input type="hidden" name="access_key" value="c8b2b2f8-7f3d-4c9e-8f8b-2e5b7a9c4d8f">
+                            <input type="hidden" name="subject" value="New Order from Ahadu Habesha Website">
+                            <input type="hidden" name="from_name" value="Ahadu Habesha Order System">
+                            <input type="hidden" name="redirect" value="false">
+                            <input type="hidden" name="email" value="girmatensae18@gmail.com">
+                            
+                            <!-- Product Information -->
+                            <input type="hidden" id="hiddenProductName" name="Product Name">
+                            <input type="hidden" id="hiddenProductPrice" name="Product Price">
                             
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="fullName">Full Name *</label>
-                                        <input type="text" class="form-control" id="fullName" name="fullName" required>
+                                        <input type="text" class="form-control" id="fullName" name="Customer Name" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="phone">Phone Number *</label>
-                                        <input type="tel" class="form-control" id="phone" name="phone" required>
+                                        <input type="tel" class="form-control" id="phone" name="Phone Number" required>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="address">Full Address *</label>
-                                <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
+                                <textarea class="form-control" id="address" name="Address" rows="3" required></textarea>
                             </div>
                             
                             <div class="form-group">
                                 <label for="message">Additional Message</label>
-                                <textarea class="form-control" id="message" name="message" rows="4" placeholder="Any special instructions or additional information..."></textarea>
+                                <textarea class="form-control" id="message" name="Message" rows="4" placeholder="Any special instructions or additional information..."></textarea>
                             </div>
                             
                             <button type="submit" class="btn btn-order">
                                 <i class="fa fa-paper-plane"></i> Place Order
                             </button>
                         </form>
-
-                        <!-- Contact Information -->
-                        <div class="contact-info">
-                            <h5>Alternative Contact Methods</h5>
-                            <p>If you encounter any issues with the form above, you can contact us directly:</p>
-                            <p><strong>Email:</strong> <span class="email">girmatensae18@gmail.com</span></p>
-                            <p><strong>Phone:</strong> 010-020-0340</p>
-                            <p>Please include the product name and your contact details in your message.</p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -304,23 +317,35 @@
     <!-- Global Init -->
     <script src="assets/js/custom.js"></script>
 
-    <!-- EmailJS -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
     <script>
-        // EmailJS Configuration
-        (function(){
-            emailjs.init({
-                publicKey: "YOUR_PUBLIC_KEY", // You'll need to replace this
-            });
-        })();
-
         // Get product information from URL parameters
         function getUrlParameter(name) {
             name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
             var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
             var results = regex.exec(location.search);
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Show message function
+        function showMessage(type, text) {
+            var successMsg = document.getElementById('successMessage');
+            var errorMsg = document.getElementById('errorMessage');
+            
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+            
+            if (type === 'success') {
+                successMsg.style.display = 'block';
+                setTimeout(function() {
+                    successMsg.style.display = 'none';
+                }, 5000);
+            } else {
+                document.getElementById('errorText').textContent = text;
+                errorMsg.style.display = 'block';
+                setTimeout(function() {
+                    errorMsg.style.display = 'none';
+                }, 5000);
+            }
         }
 
         // Populate product information
@@ -334,7 +359,7 @@
             document.getElementById('hiddenProductPrice').value = productPrice;
         });
 
-        // Handle form submission using EmailJS
+        // Handle form submission
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -345,71 +370,53 @@
             submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Sending Order...';
             submitBtn.disabled = true;
             
-            var templateParams = {
-                to_email: 'girmatensae18@gmail.com',
-                product_name: document.getElementById('hiddenProductName').value,
-                product_price: document.getElementById('hiddenProductPrice').value,
-                customer_name: document.getElementById('fullName').value,
-                customer_phone: document.getElementById('phone').value,
-                customer_address: document.getElementById('address').value,
-                customer_message: document.getElementById('message').value || 'No additional message',
-                order_date: new Date().toLocaleString()
-            };
+            // Create FormData
+            var formData = new FormData(this);
             
-            // Send email using EmailJS
-            emailjs.send('service_ahaduhabesha', 'template_ahaduhabesha', templateParams)
-                .then(function(response) {
-                    console.log('SUCCESS!', response.status, response.text);
+            // Send to Formspree
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Success
+                    showMessage('success');
                     
-                    // Success message
-                    alert('Order sent successfully! We will contact you soon.');
-                    
-                    // Clear the form
+                    // Clear form
                     document.getElementById('orderForm').reset();
-                    document.getElementById('productName').textContent = getUrlParameter('product') || 'Product Name';
-                    document.getElementById('productPrice').textContent = getUrlParameter('price') || '$0.00';
                     
-                    // Optional: Redirect back to homepage after delay
+                    // Repopulate product info
+                    var productName = getUrlParameter('product') || 'Product Name';
+                    var productPrice = getUrlParameter('price') || '$0.00';
+                    document.getElementById('productName').textContent = productName;
+                    document.getElementById('productPrice').textContent = productPrice;
+                    document.getElementById('hiddenProductName').value = productName;
+                    document.getElementById('hiddenProductPrice').value = productPrice;
+                    
+                    // Optional redirect
                     setTimeout(function() {
-                        if (confirm('Would you like to go back to the homepage?')) {
+                        if (confirm('Would you like to continue shopping?')) {
                             window.location.href = 'index.html';
                         }
-                    }, 2000);
+                    }, 3000);
                     
-                }, function(error) {
-                    console.log('FAILED...', error);
-                    
-                    // Fallback to mailto if EmailJS fails
-                    var productName = document.getElementById('hiddenProductName').value;
-                    var productPrice = document.getElementById('hiddenProductPrice').value;
-                    var fullName = document.getElementById('fullName').value;
-                    var phone = document.getElementById('phone').value;
-                    var address = document.getElementById('address').value;
-                    var message = document.getElementById('message').value;
-                    
-                    var subject = 'New Order from ' + fullName + ' - ' + productName;
-                    var body = 'ORDER DETAILS:\n\n' +
-                              'Product: ' + productName + '\n' +
-                              'Price: ' + productPrice + '\n\n' +
-                              'CUSTOMER INFORMATION:\n' +
-                              'Name: ' + fullName + '\n' +
-                              'Phone: ' + phone + '\n' +
-                              'Address: ' + address + '\n\n' +
-                              'MESSAGE:\n' + (message || 'No additional message') + '\n\n' +
-                              'Order placed on: ' + new Date().toLocaleString();
-                    
-                    var mailtoLink = 'mailto:girmatensae18@gmail.com' +
-                                   '?subject=' + encodeURIComponent(subject) +
-                                   '&body=' + encodeURIComponent(body);
-                    
-                    window.location.href = mailtoLink;
-                    alert('Opening your email client as backup. Please send the email to complete your order.');
-                })
-                .finally(function() {
-                    // Reset button
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                });
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showMessage('error', 'Failed to send order. Please try again or contact us directly at girmatensae18@gmail.com');
+            })
+            .finally(function() {
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
         });
     </script>
 </body>
