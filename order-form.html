@@ -84,6 +84,25 @@
             color: #ff919d;
             text-decoration: none;
         }
+        .contact-info {
+            background: #f0f8ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .contact-info h5 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .contact-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .contact-info .email {
+            color: #ff919d;
+            font-weight: 600;
+        }
     </style>
 </head>
 
@@ -155,8 +174,8 @@
                             <div class="product-price" id="productPrice">$0.00</div>
                         </div>
 
-                        <!-- Order Form -->
-                        <form id="orderForm" action="send-order.php" method="POST">
+                        <!-- Order Form - Using mailto for email sending -->
+                        <form id="orderForm" action="#" method="POST">
                             <input type="hidden" id="hiddenProductName" name="productName">
                             <input type="hidden" id="hiddenProductPrice" name="productPrice">
                             
@@ -189,6 +208,15 @@
                                 <i class="fa fa-paper-plane"></i> Place Order
                             </button>
                         </form>
+
+                        <!-- Contact Information -->
+                        <div class="contact-info">
+                            <h5>Alternative Contact Methods</h5>
+                            <p>If you encounter any issues with the form above, you can contact us directly:</p>
+                            <p><strong>Email:</strong> <span class="email">girmatensae18@gmail.com</span></p>
+                            <p><strong>Phone:</strong> 010-020-0340</p>
+                            <p>Please include the product name and your contact details in your message.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -296,49 +324,46 @@
             document.getElementById('hiddenProductPrice').value = productPrice;
         });
 
-        // Handle form submission
+        // Handle form submission using mailto
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Show loading state
-            var submitBtn = document.querySelector('.btn-order');
-            var originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Sending Order...';
-            submitBtn.disabled = true;
+            var productName = document.getElementById('hiddenProductName').value;
+            var productPrice = document.getElementById('hiddenProductPrice').value;
+            var fullName = document.getElementById('fullName').value;
+            var phone = document.getElementById('phone').value;
+            var address = document.getElementById('address').value;
+            var message = document.getElementById('message').value;
             
-            // Create FormData object
-            var formData = new FormData(this);
+            // Create email content
+            var subject = 'New Order from ' + fullName + ' - ' + productName;
+            var body = 'ORDER DETAILS:\n\n' +
+                      'Product: ' + productName + '\n' +
+                      'Price: ' + productPrice + '\n\n' +
+                      'CUSTOMER INFORMATION:\n' +
+                      'Name: ' + fullName + '\n' +
+                      'Phone: ' + phone + '\n' +
+                      'Address: ' + address + '\n\n' +
+                      'MESSAGE:\n' + (message || 'No additional message') + '\n\n' +
+                      'Order placed on: ' + new Date().toLocaleString();
             
-            // Send form data using fetch
-            fetch('send-order.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    alert(data.message);
-                    
-                    // Reset form
+            // Create mailto link
+            var mailtoLink = 'mailto:girmatensae18@gmail.com' +
+                           '?subject=' + encodeURIComponent(subject) +
+                           '&body=' + encodeURIComponent(body);
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            alert('Your email client should open now with the order details. Please send the email to complete your order.');
+            
+            // Optional: Reset form
+            setTimeout(function() {
+                if (confirm('Would you like to clear the form?')) {
                     document.getElementById('orderForm').reset();
-                    
-                    // Redirect back to homepage after a delay
-                    setTimeout(function() {
-                        window.location.href = 'index.html';
-                    }, 2000);
-                } else {
-                    alert(data.message);
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Failed to send order. Please try again or contact us directly.');
-            })
-            .finally(function() {
-                // Reset button
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            });
+            }, 2000);
         });
     </script>
 </body>

@@ -1,7 +1,7 @@
 // Shopping Cart Functionality
 function addToCart(productName, productPrice, productImage) {
     // Redirect to order form with product information
-    var orderUrl = 'order-form-simple.html?product=' + encodeURIComponent(productName) + '&price=' + encodeURIComponent(productPrice);
+    var orderUrl = 'order-form.html?product=' + encodeURIComponent(productName) + '&price=' + encodeURIComponent(productPrice);
     if (productImage) {
         orderUrl += '&image=' + encodeURIComponent(productImage);
     }
