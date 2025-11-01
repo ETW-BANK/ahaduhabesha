@@ -188,14 +188,13 @@
                             <div class="product-price" id="productPrice">$0.00</div>
                         </div>
 
-                        <!-- Order Form using Web3Forms (Free Email Service) -->
-                        <form id="orderForm" action="https://api.web3forms.com/submit" method="POST">
-                            <!-- Hidden fields for Web3Forms -->
-                            <input type="hidden" name="access_key" value="c8b2b2f8-7f3d-4c9e-8f8b-2e5b7a9c4d8f">
-                            <input type="hidden" name="subject" value="New Order from Ahadu Habesha Website">
-                            <input type="hidden" name="from_name" value="Ahadu Habesha Order System">
-                            <input type="hidden" name="redirect" value="false">
-                            <input type="hidden" name="email" value="girmatensae18@gmail.com">
+                        <!-- Order Form using Formspree (Reliable Email Service) -->
+                        <form id="orderForm" action="https://formspree.io/f/xpznvqko" method="POST">
+                            <!-- Hidden fields for Formspree -->
+                            <input type="hidden" name="_to" value="girmatensae18@gmail.com">
+                            <input type="hidden" name="_subject" value="New Order from Ahadu Habesha Website">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_next" value="false">
                             
                             <!-- Product Information -->
                             <input type="hidden" id="hiddenProductName" name="Product Name">
