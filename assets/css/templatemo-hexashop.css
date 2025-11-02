@@ -2446,6 +2446,18 @@ responsive
 }
 
 @media (max-width: 767px) {
+  /* Make left banner image responsive for mobile */
+  .main-banner .left-content .thumb img {
+    width: 100%;
+    height: auto !important; /* Allow natural height scaling */
+    max-height: none !important; /* Remove any height constraints */
+    object-fit: contain; /* Maintain aspect ratio */
+  }
+  
+  .main-banner .left-content .thumb {
+    height: auto !important; /* Allow container to resize */
+  }
+  
   .main-banner .left-content .thumb .inner-content {
     left: 50%;
     top: 47.5%;
