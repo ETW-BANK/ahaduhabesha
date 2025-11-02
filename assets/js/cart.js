@@ -1,6 +1,6 @@
 // Shopping Cart Functionality
 function addToCart(productName, productPrice, productImage) {
-    // Redirect to Web3Forms order form with product information
+    // Redirect to Web3Forms order form for actual email delivery
     var orderUrl = 'order-form-direct.html?product=' + encodeURIComponent(productName) + '&price=' + encodeURIComponent(productPrice);
     if (productImage) {
         orderUrl += '&image=' + encodeURIComponent(productImage);

@@ -18,7 +18,7 @@
 
     <style>
         .order-form-section {
-            padding: 100px 0px;
+            padding: 150px 0px;
             background-color: #f8f9fa;
         }
         .order-form {
@@ -41,6 +41,16 @@
             border-color: #ff919d;
             box-shadow: 0 0 0 0.2rem rgba(255, 145, 157, 0.25);
             outline: none;
+        }
+        select.form-control {
+            height: auto;
+            padding: 12px 15px;
+            background-color: white;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 16px 12px;
+            appearance: none;
         }
         .btn-order {
             background: linear-gradient(105deg, #6394ff 0%, #ff919d 100%);
@@ -126,10 +136,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <nav class="main-nav">
+                    <nav class="main-nav" >
                         <!-- ***** Logo Start ***** -->
                         <a href="index.html" class="logo">
-                            <img src="assets/images/logo.png">
+                            <img src="assets/images/banner/roundlogonew.png" >
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
@@ -138,16 +148,7 @@
                             <li class="scroll-to-section"><a href="index.html#men">Men's</a></li>
                             <li class="scroll-to-section"><a href="index.html#women">Women's</a></li>
                             <li class="scroll-to-section"><a href="index.html#kids">Kid's</a></li>
-                            <li class="submenu">
-                                <a href="javascript:;">Pages</a>
-                                <ul>
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="products.html">Products</a></li>
-                                    <li><a href="single-product.html">Single Product</a></li>
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                </ul>
-                            </li>
-                            <li class="scroll-to-section"><a href="index.html#explore">Features</a></li>
+                            <li class="scroll-to-section"><a href="index.html#accessories">Family</a></li> 
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -191,10 +192,11 @@
                         <!-- Order Form using Web3Forms (Guaranteed Working) -->
                         <form id="orderForm" action="https://api.web3forms.com/submit" method="POST">
                             <!-- Hidden fields for Web3Forms -->
-                            <input type="hidden" name="access_key" value="a5c9f8e2-3b1d-4a7e-9c6f-2e8b5d9a4c7f">
+                            <input type="hidden" name="access_key" value="f252607b-2089-4137-85b0-25b7b84a607c">
                             <input type="hidden" name="subject" value="New Order from Ahadu Habesha Website">
                             <input type="hidden" name="from_name" value="Ahadu Habesha Order System">
                             <input type="hidden" name="redirect" value="false">
+                            <input type="hidden" name="email" value="girmatensae18@gmail.com">
                             
                             <!-- Product Information -->
                             <input type="hidden" id="hiddenProductName" name="Product Name">
@@ -215,9 +217,50 @@
                                 </div>
                             </div>
                             
+                            <!-- Size Selection -->
                             <div class="form-group">
-                                <label for="address">Full Address *</label>
-                                <textarea class="form-control" id="address" name="Address" rows="3" required></textarea>
+                                <label for="size">Size *</label>
+                                <select class="form-control" id="size" name="Size" required>
+                                    <option value="">Select Size</option>
+                                    <option value="XS">XS - Extra Small</option>
+                                    <option value="S">S - Small</option>
+                                    <option value="M">M - Medium</option>
+                                    <option value="L">L - Large</option>
+                                    <option value="XL">XL - Extra Large</option>
+                                    <option value="XXL">XXL - Double Extra Large</option>
+                                    <option value="XXXL">XXXL - Triple Extra Large</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Address Fields -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="street">Street Address *</label>
+                                        <input type="text" class="form-control" id="street" name="Street Address" required placeholder="House number and street name">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="city">City *</label>
+                                        <input type="text" class="form-control" id="city" name="City" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="state">State/Province *</label>
+                                        <input type="text" class="form-control" id="state" name="State" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="country">Country *</label>
+                                        <input type="text" class="form-control" id="country" name="Country" required>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="form-group">
@@ -243,44 +286,23 @@
                 <div class="col-lg-3">
                     <div class="first-item">
                         <div class="logo">
-                            <img src="assets/images/white-logo.png" alt="hexashop ecommerce templatemo">
+                            <img src="assets/images/banner/roundlogonew.png" >                       
                         </div>
                         <ul>
+
                             <li><a href="#">16501 Collins Ave, Sunny Isles Beach, FL 33160, United States</a></li>
-                            <li><a href="#">girmatensae18@gmail.com</a></li>
+                            <li><a href="#">hexashop@company.com</a></li>
                             <li><a href="#">010-020-0340</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3">
-                    <h4>Shopping &amp; Categories</h4>
-                    <ul>
-                        <li><a href="#">Men's Shopping</a></li>
-                        <li><a href="#">Women's Shopping</a></li>
-                        <li><a href="#">Kid's Shopping</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3">
-                    <h4>Useful Links</h4>
-                    <ul>
-                        <li><a href="#">Homepage</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Help</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3">
-                    <h4>Help &amp; Information</h4>
-                    <ul>
-                        <li><a href="#">Help</a></li>
-                        <li><a href="#">FAQ's</a></li>
-                        <li><a href="#">Shipping</a></li>
-                        <li><a href="#">Tracking ID</a></li>
-                    </ul>
-                </div>
+              
+           
+              
                 <div class="col-lg-12">
                     <div class="under-footer">
-                        <p>Copyright © 2022 HexaShop Co., Ltd. All Rights Reserved. 
+                        <p>Copyright © 2025 Ahadu Habesha. All Rights Reserved. 
+                        
                         <br>Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a></p>
                         <ul>
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>

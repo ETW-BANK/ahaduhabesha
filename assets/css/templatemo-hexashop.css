@@ -87,6 +87,7 @@ html, body {
   -ms-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding-top: 20px; /* header height (150px) + 20px gap = 170px */
 }
 
 a {
@@ -162,7 +163,7 @@ body {
 
 .main-white-button a {
   font-size: 13px;
-  color: #2a2a2a;
+  color: #090121;
   background-color: #fff;
   padding: 12px 25px;
   display: inline-block;
@@ -209,8 +210,11 @@ header
 
 .background-header {
   border-bottom: none !important;
-  background-color: #fff;
-  height: 80px!important;
+  background-image: url('../images/banner/20251102_0152_Banner\ with\ Logo_remix_01k910q669et58fmnv0wc4s1gn\ \(1\).png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 150px!important;
   position: fixed!important;
   top: 0px;
   left: 0px;
@@ -220,75 +224,93 @@ header
 
 .background-header .logo,
 .background-header .main-nav .nav li a {
-  color: #1e1e1e!important;
+  color: darkblue !important; /* dark blue as requested */
 }
 
 .background-header .main-nav .nav li:hover a {
-  color: #2a2a2a!important;
+  color: #09911b!important;
 }
 
 .background-header .nav li a.active {
-  color: #2a2a2a!important;
+     color: red;
 }
 
 .header-area {
-  border-bottom: 3px dotted #eee;
+ 
   box-shadow: none;
-  background: black;
-  position: absolute;
+  background-image: url('../images/banner/20251102_0152_Banner\ with\ Logo_remix_01k910q669et58fmnv0wc4s1gn\ \(1\).png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: fixed; /* fixed positioning to stay at top while scrolling */
   top: 0px;
   left: 0px;
   right: 0px;
   z-index: 100;
-  height: 120px; /* increased so larger logo fits */
+  height: 150px; /* fixed header height */
   -webkit-transition: all .5s ease 0s;
   -moz-transition: all .5s ease 0s;
   -o-transition: all .5s ease 0s;
   transition: all .5s ease 0s;
+
 }
 
 .header-area .main-nav {
-  min-height: 80px;
+  min-height: 150px;
   color: white;
-  display: flex; /* use flexbox for vertical centering */
+  display: flex;
   align-items: center;
+  justify-content: center; /* center the menu */
+  position: relative;
+}
+
+.background-header .main-nav {
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center the menu */
+  position: relative;
 }
 
 .header-area .main-nav .logo {
-  line-height: 100px;
+  line-height: 150px; /* match fixed header height */
   color: #fff;
   font-size: 28px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  float: none; /* remove float when using flexbox */
+  position: absolute; /* absolute positioning to keep logo on left */
+  left: 170px; /* moved 50px to the left as requested */
+  top: 50%; /* center vertically */
+  transform: translateY(-50%); /* perfect vertical centering */
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
-  margin-left: 0; /* default, image will be nudged instead */
 }
+
 
 /* Ensure logo image fits inside the header and aligns nicely */
 .header-area .main-nav .logo img {
   display: block; /* remove inline-gap and allow margin control */
-  height: 90px; /* fit within header */
-  width: auto;
-  margin-left: -18px; /* nudge a bit to the left on desktop */
+  height: 150px; /* reduced to 150px height */
+  width: 150px; /* reduced to 150px width */
+  margin-left: 0; /* removed left nudge since container is positioned left */
 }
+
 
 @media (max-width: 767px) {
   .header-area .main-nav .logo img {
-    height: 64px; /* smaller on mobile */
-    margin: 8px auto 0; /* center in small viewports */
+    height: 64px; /* fits well on mobile with 3px top/bottom padding in 70px header */
+    margin: 3px auto 0; /* 3px top margin for consistent spacing */
     margin-left: 0; /* override desktop left nudge */
   }
 }
 
-/* Ensure nav aligns to the right when using flex layout */
+/* Menu positioned 30px to the left from center */
 .header-area .main-nav .nav {
   float: none;
-  margin-left: auto;
+  margin-left: -30px; /* move menu 30px to the left as requested */
 }
 
 @media (max-width: 767px) {
@@ -299,7 +321,17 @@ header
 }
 
 .background-header .main-nav .logo {
-  line-height: 75px;
+  line-height: 150px !important; /* match fixed header height */
+  position: absolute !important; /* absolute positioning to keep logo on left */
+  left: 50px !important; /* moved 50px to the left as requested */
+  top: 50% !important; /* center vertically */
+  transform: translateY(-50%) !important; /* perfect vertical centering */
+}
+
+.background-header .main-nav .logo img {
+  height: 150px !important; /* reduced to 150px - fixed logo size */
+  width: 150px !important; /* reduced to 150px - fixed logo size */
+  margin-top: 0 !important;
 }
 
 .background-header .nav {
@@ -307,7 +339,7 @@ header
 }
 
 .header-area .main-nav .nav {
-  float: right;
+  float: none;
   margin-top: 30px;
   margin-right: 0px;
   background-color: transparent;
@@ -332,7 +364,7 @@ header
   display: block;
   font-weight: 600;
   font-size: 15px;
-  color: #2a2a2a;
+  color: darkblue; /* dark blue as requested */
   text-transform: capitalize;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
@@ -345,19 +377,27 @@ header
 }
 
 .header-area .main-nav .nav li a {
-  color: #2a2a2a;
+  color: darkblue; /* dark blue as requested */
 }
 
-.header-area .main-nav .nav li:hover a,
+.header-area .main-nav .nav li:hover a {
+  color: white !important; /* white on hover as requested */
+}
+
 .header-area .main-nav .nav li a.active {
-  color: #aaa!important;
+  color: green !important; /* green for active as requested */
 }
 
-.background-header .main-nav .nav li:hover a,
-.background-header .main-nav .nav li a.active {
-  color: #aaa!important;
+.background-header .main-nav .nav li:hover a {
+  color: white !important; /* white on hover as requested */
   opacity: 1;
 }
+
+.background-header .main-nav .nav li a.active {
+  color: green !important; /* green for active as requested */
+  opacity: 1;
+}
+
 
 .header-area .main-nav .nav li.submenu {
   position: relative;
@@ -549,7 +589,33 @@ header
 }
 
 .header-area.header-sticky {
-  min-height: 80px;
+  min-height: 150px;
+  position: fixed !important;
+  background-image: url('../images/banner/banner.png')!important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.header-area.header-sticky .main-nav {
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center the menu */
+}
+
+.header-area.header-sticky .main-nav .logo {
+  line-height: 150px !important;
+  position: absolute !important; /* absolute positioning to keep logo on left */
+  left: 50px !important; /* moved 50px to the left as requested */
+  top: 50% !important; /* center vertically */
+  transform: translateY(-50%) !important; /* perfect vertical centering */
+}
+
+.header-area.header-sticky .main-nav .logo img {
+  height: 150px !important; /* reduced to 150px - fixed logo size */
+  width: 150px !important; /* reduced to 150px - fixed logo size */
+  margin-top: 0 !important;
 }
 
 .header-area .nav {
@@ -1534,34 +1600,56 @@ footer
 */
 
 footer {
-  margin-top: 60px;
-  padding: 60px 0px 30px 0px;
-  background-color: #2a2a2a;
+  background-image: url('../images/banner/banner.png');
+  height: auto; /* changed from fixed 300px to auto for responsiveness */
+  min-height: 150px; /* reduced from 300px to 150px (half) */
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative; /* normal flow positioning */
+  margin-top: 60px; /* space from content above */
+  margin-bottom: 0; /* no space at bottom */
+  padding: 30px 20px 15px 20px; /* reduced padding (half of original) */
+  width: 100%; /* ensure full width */
+  box-sizing: border-box; /* include padding in width calculation */
+  overflow: hidden; /* ensure content stays within footer bounds */
+  text-align: center; /* center all content */
 }
 
 footer .logo {
   margin-bottom: 20px;
+  position: relative; /* ensure logo stays within footer */
+  max-width: 100%; /* prevent logo from overflowing */
+  text-align: center; /* center the logo container */
+}
+
+footer .logo img {
+  max-width: 120px; /* reduced logo size for the footer */
+  height: auto; /* maintain aspect ratio */
+  display: block; /* make image a block element */
+  margin: 0 auto; /* center the logo image */
 }
 
 footer ul li {
   display: block;
   margin-bottom: 10px;
+  position: relative; /* ensure list items stay within footer */
+  text-align: center; /* center the list items */
 }
 
 footer ul li a {
   font-size: 14px;
-  color: #fff;
+  color: #1e3a8a; /* blue-black color */
   transition: all .3s;
 }
 
 footer ul li a:hover {
-  color: #aaa;
+  color: #2563eb; /* slightly lighter blue on hover */
 }
 
 footer h4 {
   letter-spacing: 0.5px;
   font-size: 16px;
-  color: #fff;
+  color: #1e3a8a; /* blue-black color */
   font-weight: 700;
   margin-bottom: 20px;
 }
@@ -1571,6 +1659,8 @@ footer .under-footer {
   padding-top: 30px;
   text-align: center;
   border-top: 1px solid rgba(250,250,250,0.3);
+  position: relative; /* ensure under-footer stays within footer */
+  max-width: 100%; /* prevent overflow */
 }
 
 footer .under-footer ul {
@@ -1587,17 +1677,32 @@ footer .under-footer ul li a {
 }
 
 footer .under-footer p {
-  color: #fff;
+  color: #1e3a8a; /* blue-black color */
   font-size: 14px;
   font-weight: 300;
 }
 
 footer .under-footer a {
-  color: #cff;
+  color: #1e3a8a; /* blue-black color */
 }
 
 footer .under-footer a:hover {
-  color: #c66;
+  color: #2563eb; /* slightly lighter blue on hover */
+}
+
+footer .first-item {
+  text-align: center; /* center all content in first-item */
+  margin: 0 auto; /* center the container itself */
+}
+
+footer .row {
+  justify-content: center; /* center the row content */
+  align-items: center; /* vertically center items */
+}
+
+footer .col-lg-3 {
+  display: flex;
+  justify-content: center; /* center the column content */
 }
 
 
@@ -2309,6 +2414,29 @@ responsive
     margin-right: 0px;
     margin-bottom: 30px;
   }
+  
+  /* Footer responsive styling for tablets */
+  footer {
+    padding: 50px 15px 25px 15px; /* adjusted padding for tablets */
+    min-height: 280px; /* adjusted height for tablets */
+  }
+  
+  footer .logo img {
+    max-width: 180px; /* adjusted logo size for tablets */
+  }
+  
+  footer h4 {
+    font-size: 15px; /* adjusted font size for tablets */
+    margin-bottom: 18px;
+  }
+  
+  footer ul li a {
+    font-size: 13px; /* adjusted font size for tablets */
+  }
+  
+  footer .under-footer ul li a {
+    font-size: 20px; /* adjusted icon size for tablets */
+  }
 }
 
 @media (max-width: 767px) {
@@ -2323,9 +2451,48 @@ responsive
   }
   footer {
     text-align: center;
+    padding: 40px 15px 20px 15px; /* reduced padding for mobile */
+    min-height: 250px; /* smaller minimum height for mobile */
   }
+  
+  footer .logo {
+    margin-bottom: 15px; /* reduced margin for mobile */
+  }
+  
+  footer .logo img {
+    max-width: 150px; /* limit logo size on mobile */
+    height: auto;
+  }
+  
   footer h4 {
-    margin-top: 30px;
+    margin-top: 25px;
+    margin-bottom: 15px; /* reduced margin for mobile */
+    font-size: 14px; /* smaller font size for mobile */
+  }
+  
+  footer ul li {
+    margin-bottom: 8px; /* reduced margin for mobile */
+  }
+  
+  footer ul li a {
+    font-size: 12px; /* smaller font size for mobile */
+  }
+  
+  footer .under-footer {
+    margin-top: 20px; /* reduced margin for mobile */
+    padding-top: 20px; /* reduced padding for mobile */
+  }
+  
+  footer .under-footer p {
+    font-size: 12px; /* smaller font size for mobile */
+  }
+  
+  footer .under-footer ul li {
+    margin: 0px 5px; /* reduced margin for mobile */
+  }
+  
+  footer .under-footer ul li a {
+    font-size: 18px; /* smaller icon size for mobile */
   }
 }
 
