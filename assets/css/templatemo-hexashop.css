@@ -482,7 +482,7 @@ header
   height: 40px;
   text-indent: -9999em;
   z-index: 99;
-  right: 40px;
+  right: 15px; /* moved closer to right corner */
   display: none;
 }
 
@@ -501,8 +501,9 @@ header
   display: block;
   position: absolute;
   width: 30px;
-  height: 2px;
+  height: 4px; /* increased from 2px to 4px for better visibility */
   left: 0;
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.8); /* white shadow for visibility */
 }
 
 .background-header .main-nav .menu-trigger span,
@@ -521,9 +522,10 @@ header
   display: block;
   position: absolute;
   width: 30px;
-  height: 2px;
+  height: 4px; /* increased from 2px to 4px for better visibility */
   left: 0;
   width: 75%;
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.8); /* white shadow for visibility */
 }
 
 .background-header .main-nav .menu-trigger span:before,
