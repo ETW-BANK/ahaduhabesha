@@ -481,6 +481,8 @@ header
   width: 32px;
   height: 40px;
   text-indent: -9999em;
+  font-weight: 800;
+
   z-index: 99;
   right: 15px; /* moved closer to right corner */
   display: none;
@@ -488,6 +490,7 @@ header
 
 .background-header .main-nav .menu-trigger {
   top: 23px;
+
 }
 
 .header-area .main-nav .menu-trigger span,
@@ -497,12 +500,13 @@ header
   -o-transition: all 0.4s;
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
-  background-color: #1e1e1e;
+  background-color: lime;
+  font-weight: 800;
   display: block;
   position: absolute;
   width: 30px;
   height: 4px; /* increased from 2px to 4px for better visibility */
-  left: 0;
+  left: 20px;
   box-shadow: 0 0 3px rgba(255, 255, 255, 0.8); /* white shadow for visibility */
 }
 
